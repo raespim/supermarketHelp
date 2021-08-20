@@ -6,7 +6,6 @@ import java.lang.IllegalStateException
 
 class MainApplication : Application(){
     companion object {
-        val appContext = getInstance().applicationContext
         private var appInstance: MainApplication? = null
         fun getInstance(): MainApplication {
             if (appInstance == null) {
