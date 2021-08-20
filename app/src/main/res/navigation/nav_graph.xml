@@ -9,5 +9,12 @@
         android:name="com.devraespim.supermarkethelp.ui.fragment.CategoriesFragment"
         android:label="Categorias"
         tools:layout="@layout/fragment_categories">
+        <action android:id="@+id/action_CategoriesFragment_to_CategoryDetailsFragment"
+            app:destination="@+id/CategoryDetailsFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/CategoryDetailsFragment"
+        android:name="com.devraespim.supermarkethelp.ui.fragment.CategoryDetailsFragment"
+        tools:layout="@layout/fragment_category_details">
     </fragment>
 </navigation>

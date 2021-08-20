@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="8dp"
+    android:id="@+id/cardview"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -19,7 +20,7 @@
             android:layout_height="64dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/cardview_title"
@@ -31,7 +32,6 @@
             android:textColor="@color/black"
             android:textSize="32sp"
             android:textStyle="bold" />
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

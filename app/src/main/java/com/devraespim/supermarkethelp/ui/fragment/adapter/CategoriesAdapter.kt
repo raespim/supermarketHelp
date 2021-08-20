@@ -9,7 +9,8 @@ import com.devraespim.supermarkethelp.model.Category
 import kotlinx.android.synthetic.main.cardview_item_category.view.*
 
 class CategoriesAdapter(
-    val categories: MutableList<Category>
+    val categories: MutableList<Category>,
+    val onClick: (String) -> Unit
 ) : RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CategoriesViewHolder(
@@ -22,6 +23,9 @@ class CategoriesAdapter(
         with(view){
             cardview_title.text = category.titleCategory
             cardview_image.setImageResource(category.imageCategory)
+            cardview.setOnClickListener {
+                onClick(category.titleCategory)
+            }
         }
     }
 

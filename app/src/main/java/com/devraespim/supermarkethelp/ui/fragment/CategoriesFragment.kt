@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devraespim.supermarkethelp.R
 import com.devraespim.supermarkethelp.model.Category
 import com.devraespim.supermarkethelp.ui.fragment.adapter.CategoriesAdapter
-
 
 class CategoriesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -21,14 +21,18 @@ class CategoriesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_categories, container, false)
-        recyclerView = view.findViewById(R.id.recyclerView_categories)
-        return view
+        val root = inflater.inflate(R.layout.fragment_categories, container, false)
+        initializeViews(root)
+        return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+    }
+
+    private fun initializeViews(root: View) {
+        recyclerView = root.findViewById(R.id.recyclerView_categories)
     }
 
     private fun addCategories() = mutableListOf(
@@ -43,8 +47,16 @@ class CategoriesFragment : Fragment() {
         recyclerView.let {
             it.layoutManager = LinearLayoutManager(requireActivity())
             it.itemAnimator = DefaultItemAnimator()
-            it.hasFixedSize()
-            it.adapter = CategoriesAdapter(addCategories())
+            it.setHasFixedSize(true)
+            it.adapter = CategoriesAdapter(addCategories()) { categoryTitle ->
+                arguments = Bundle().apply {
+                    putString("category", categoryTitle)
+                }
+                findNavController().navigate(
+                    R.id.action_CategoriesFragment_to_CategoryDetailsFragment,
+                    arguments
+                )
+            }
         }
     }
 }
