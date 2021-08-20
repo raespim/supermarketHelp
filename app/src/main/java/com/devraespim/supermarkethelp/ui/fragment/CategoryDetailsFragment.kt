@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.devraespim.supermarkethelp.MainApplication
 import com.devraespim.supermarkethelp.R
 import com.devraespim.supermarkethelp.model.*
 import com.devraespim.supermarkethelp.ui.activity.MainActivity
@@ -18,6 +20,7 @@ import java.lang.Exception
 class CategoryDetailsFragment : Fragment() {
     private var getTitleCategory = ""
     private val prefs = ModelPreferencesManager
+    private val appContext = MainApplication.getInstance().applicationContext
     private lateinit var btnSave: Button
     private lateinit var btnRemove: Button
     private lateinit var product1: EditText
@@ -61,7 +64,7 @@ class CategoryDetailsFragment : Fragment() {
             setupSavingAndRemoveDataFromTitlePick(getTitleCategory)
             showSavedDataFromTitlePick(getTitleCategory)
         } catch (e: Exception){
-            Log.e("onViewCreated()", e.message.toString())
+            Log.e("CategoryDetailsFragment onViewCreated()", e.message.toString())
         }
     }
 
@@ -228,6 +231,7 @@ class CategoryDetailsFragment : Fragment() {
                 "KEY_DRINKS" -> insertDrinksObject()
                 "KEY_OTHERS" -> insertOthersObject()
             }
+            Toast.makeText(appContext, "Lista salva com sucesso!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -240,10 +244,30 @@ class CategoryDetailsFragment : Fragment() {
                 "KEY_DRINKS" -> removeObject("KEY_DRINKS")
                 "KEY_OTHERS" -> removeObject("KEY_OTHERS")
             }
+            refreshList()
+            Toast.makeText(appContext, "Itens removidos.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun removeObject(key: String) = prefs.remove(key)
+
+    private fun refreshList() {
+        product1.setText("")
+        product2.setText("")
+        product3.setText("")
+        product4.setText("")
+        product5.setText("")
+        product6.setText("")
+        product7.setText("")
+        product8.setText("")
+        product9.setText("")
+        product10.setText("")
+        product11.setText("")
+        product12.setText("")
+        product13.setText("")
+        product14.setText("")
+        product15.setText("")
+    }
 
     private fun insertCleaningObject() {
         prefs.insertCleaningObject(
@@ -354,5 +378,4 @@ class CategoryDetailsFragment : Fragment() {
             ), "KEY_DRINKS"
         )
     }
-
 }
