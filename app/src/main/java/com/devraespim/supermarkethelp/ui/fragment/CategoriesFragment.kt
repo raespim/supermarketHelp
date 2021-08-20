@@ -21,12 +21,13 @@ class CategoriesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        val view = inflater.inflate(R.layout.fragment_categories, container, false)
+        recyclerView = view.findViewById(R.id.recyclerView_categories)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeViews()
         setupRecyclerView()
     }
 
@@ -45,9 +46,5 @@ class CategoriesFragment : Fragment() {
             it.hasFixedSize()
             it.adapter = CategoriesAdapter(addCategories())
         }
-    }
-
-    private fun initializeViews() {
-        recyclerView = requireActivity().findViewById(R.id.recyclerView_categories)
     }
 }
