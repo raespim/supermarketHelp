@@ -21,6 +21,7 @@ class CategoryDetailsFragment : Fragment() {
     private var getTitleCategory = ""
     private val prefs = ModelPreferencesManager
     private val appContext = MainApplication.getInstance().applicationContext
+    private val TAG = "CategoryDetailsFragment"
     private lateinit var btnSave: Button
     private lateinit var btnRemove: Button
     private lateinit var product1: EditText
@@ -64,7 +65,7 @@ class CategoryDetailsFragment : Fragment() {
             setupSavingAndRemoveDataFromTitlePick(getTitleCategory)
             showSavedDataFromTitlePick(getTitleCategory)
         } catch (e: Exception){
-            Log.e("CategoryDetailsFragment onViewCreated()", e.message.toString())
+            Log.e(TAG, "onViewCreated()" + e.message.toString())
         }
     }
 
