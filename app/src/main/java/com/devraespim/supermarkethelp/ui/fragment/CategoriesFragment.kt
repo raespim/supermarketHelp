@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devraespim.supermarkethelp.R
 import com.devraespim.supermarkethelp.model.Category
+import com.devraespim.supermarkethelp.ui.activity.MainActivity
 import com.devraespim.supermarkethelp.ui.fragment.adapter.CategoriesAdapter
 
 class CategoriesFragment : Fragment() {
@@ -28,6 +28,7 @@ class CategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).title = "Categorias"
         setupRecyclerView()
     }
 
@@ -52,10 +53,14 @@ class CategoriesFragment : Fragment() {
                 arguments = Bundle().apply {
                     putString("category", categoryTitle)
                 }
-                findNavController().navigate(
-                    R.id.action_CategoriesFragment_to_CategoryDetailsFragment,
-                    arguments
-                )
+                val fragmentDetails = CategoryDetailsFragment()
+                fragmentDetails.arguments = arguments
+                (activity as MainActivity)
+                    .supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.conteiner_fragment, fragmentDetails )
+                    .addToBackStack(null)
+                    .commit()
             }
         }
     }
