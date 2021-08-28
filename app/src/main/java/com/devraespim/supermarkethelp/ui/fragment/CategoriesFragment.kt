@@ -19,7 +19,6 @@ class CategoriesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as MainActivity).title = "Principal - Categorias"
-
     }
 
     override fun onCreateView(
@@ -28,7 +27,6 @@ class CategoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_categories, container, false)
-
         initializeViews(root)
         return root
     }
@@ -64,7 +62,7 @@ class CategoriesFragment : Fragment() {
                 (activity as MainActivity)
                     .supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.conteiner_fragment, fragmentDetails )
+                    .replace(R.id.conteiner_fragment, fragmentDetails)
                     .addToBackStack(null)
                     .commit()
             }
